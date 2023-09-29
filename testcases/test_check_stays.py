@@ -45,10 +45,6 @@ class TestBookingDotCom:
         destination ='Saint Ann Parish'
         driver.find_element(By.XPATH, destination_path).send_keys(destination)
 
-        # click on the destination field
-        # destination_parish =f"//div[@data-testid ='destination-container']//input[@placeholder='Where are you going?'and @value = '{destination}']"
-        # driver.find_element(By.XPATH, destination_parish).click()
-
         #Select Calender
         calender =f"//div[@data-testid='searchbox-dates-container']/.."
         wait.until(EC.element_to_be_clickable((By.XPATH, calender))).click()
