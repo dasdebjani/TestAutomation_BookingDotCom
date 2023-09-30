@@ -3,11 +3,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 from selenium.webdriver.support import expected_conditions as EC
+from base.selenium_driver import SeleniumDriver
 
 
-class StaysPage():
+class StaysPage(SeleniumDriver):
 
     def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
 
     # Locators
@@ -18,104 +20,54 @@ class StaysPage():
     language_path = f"//button[@data-testid='header-language-picker-trigger']"
     english_language_path = f"//span[text()='English (UK)']"
     destination_path = f"//div[@data-testid ='destination-container']//input[@placeholder='Where are you going?']"
-    calender_path = f"//div[@data-testid='searchbox-dates-container']/.."
-    occupancy_path = f"//button[@data-testid='occupancy-config']"
+
     calender_path = f"//div[@data-testid='searchbox-dates-container']/.."
     checking_date_path = f"//span[@data-date = '2023-10-08']"
+
     checkout_date_path = f"//span[@data-date = '2023-10-09']"
     occupancy_path = f"//button[@data-testid='occupancy-config']"
+
     adult_element_path = f"//div[@data-testid='occupancy-popup']/div/div/div/following::div/button[1]"
     search_button_path = f"//span[contains(text(), 'Search') and @class = 'e4adce92df']"
 
-
-   # Get Element Method
-    def getCookieElement(self):
-        return self.driver.find_element(By.ID, self.cookies_path_id)
-
-    def getStayPageElement(self):
-        return self.driver.find_element(By.ID, self.stay_page_id)
-
-    # def getTittle(self):
-    #     return self.driver.find_element(By.XPATH, self.tittle_path)
-
-    def getPopupElement(self):
-        return self.driver.find_element(By.XPATH, self.popup_close_path)
-
-    def getLanguageElement(self):
-        return self.driver.find_element(By.XPATH, self.language_path)
-
-    def getSelectLanguageElement(self):
-        return self.driver.find_element(By.XPATH, self.english_language_path)
-
-    def getDestinationElement(self):
-        return self.driver.find_element(By.XPATH, self.destination_path)
-
-    def getCalenderElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.calender_path)))
-
-    def getCheckingDateElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.checking_date_path)))
-
-    def getCheckOutElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.checkout_date_path)))
-
-    def getOccupancyElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.occupancy_path)))
-
-    def getAdultsSelectElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.adult_element_path)))
-
-    def getSearchButtonElement(self):
-        wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.search_button_path)))
-
-
-
-    #Actions Method
-    def clickAcceptCookies(self):
-        self.getCookieElement().click()
-
+    # All actions
     def clickStaysButton(self):
-        self.getStayPageElement().click()
+        self.elementClick(self.stay_page_id, locatorType="id")
+
+    def clickAcceptCookies(self):
+        self.elementClick(self.cookies_path_id, locatorType="id")
 
     def clickPopup(self):
-        self.getPopupElement().click()
+        self.elementClick(self.popup_close_path, locatorType="xpath")
 
     def clickLanguage(self):
-        self.getLanguageElement().click()
+        self.elementClick(self.language_path, locatorType="xpath")
 
     def clickLanguageEnglish(self):
-        self.getSelectLanguageElement().click()
+        self.elementClick(self.english_language_path, locatorType="xpath")
 
-    def clickDestination(self,destinationName):
-        self.getDestinationElement().send_keys(destinationName)
+    def clickDestination(self, destinationName):
+        self.sendKeys(destinationName, self.destination_path, locatorType="xpath")
 
     def clickCalender(self):
-        self.getCalenderElement().click()
+        self.elementClick(self.calender_path, locatorType="xpath")
 
     def clickCheckingDate(self):
-        self.getCheckingDateElement().click()
+        self.elementClick(self.checking_date_path, locatorType="xpath")
 
     def clickCheckOutDate(self):
-        self.getCheckOutElement().click()
+        self.elementClick(self.checkout_date_path, locatorType="xpath")
 
     def clickOccupancy(self):
-        self.getOccupancyElement().click()
+        self.elementClick(self.occupancy_path, locatorType="xpath")
 
     def clickAdultSelect(self):
-        self.getAdultsSelectElement().click()
+        self.elementClick(self.adult_element_path, locatorType="xpath")
 
     def clickSearchButton(self):
-        self.getSearchButtonElement().click()
+        self.elementClick(self.search_button_path, locatorType="xpath")
 
-
-    def stays(self,destination):
-
+    def stays(self, destination):
         self.clickAcceptCookies()
         self.clickStaysButton()
         self.clickPopup()
