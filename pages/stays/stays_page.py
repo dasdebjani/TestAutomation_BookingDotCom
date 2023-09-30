@@ -4,9 +4,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 from selenium.webdriver.support import expected_conditions as EC
 from base.selenium_driver import SeleniumDriver
+from utilities.custome_logger import customLogger
+import logging
 
 
 class StaysPage(SeleniumDriver):
+
+    log = customLogger(logging.DEBUG)
 
     def __init__(self, driver):
         super().__init__(driver)
