@@ -1,8 +1,3 @@
-from selenium import *
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-import time
-from selenium.webdriver.support import expected_conditions as EC
 from base.selenium_driver import SeleniumDriver
 from utilities.custome_logger import customLogger
 import logging
@@ -19,7 +14,7 @@ class StaysPage(SeleniumDriver):
     # Locators
     cookies_path_id = f"onetrust-accept-btn-handler"
     stay_page_id = f"accommodations"
-    # tittle_path = f"//span[@data-testid='herobanner-title1']"
+    tittle_path = f"//span[@data-testid='herobanner-title1']"
     popup_close_path = f"//button[@aria-label='Dismiss sign in information.']"
     language_path = f"//button[@data-testid='header-language-picker-trigger']"
     english_language_path = f"//span[text()='English (UK)']"
